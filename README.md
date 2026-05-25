@@ -1,4 +1,4 @@
-# BitGo SWE InfraOps — Scalable Web Service
+# BitGo SWE InfraOps Architecture
 
 ## AWS Endpoint
 **Endpoint:** [https://paarth-infra.shop](https://paarth-infra.shop)
