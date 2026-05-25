@@ -1,13 +1,13 @@
 # BitGo SWE InfraOps — Scalable Web Service
 
 ## Architecture
-![Architecture Diagram](/home/paarth/projects/BitGO_InfraOps_Project/architecture.png)
+![Architecture Diagram](architecture.png)
 
 Route 53 resolves paarth-infra.shop to an Application Load Balancer terminating TLS via ACM. The ALB distributes traffic across ECS Fargate tasks in two public subnets across us-east-1a and us-east-1b. IAM roles follow least-privilege as the execution role covers ECR pull and CloudWatch log delivery only; the task role is intentionally empty. Container image is stored in ECR and pulled by the execution role at task startup. CloudWatch Container Insights provides task-level metrics, log delivery via awslogs driver, and a dashboard covering request count, 5xx errors, response time, and running task count. Terraform state is stored remotely in S3 with native file 
 locking. 
 
 ## AWS Endpoint
-<paarth-infra.shop>
+**Endpoint:** [https://paarth-infra.shop](https://paarth-infra.shop)
 
 ## Scaling
 ECS Application Auto Scaling uses target tracking on ALBRequestCountPerTarget with a target of 100 requests per task per minute. Minimum 2 tasks (one per AZ for fault tolerance), maximum 4. Scale-out cooldown 30 seconds, scale-in stabilization 15 minutes. Verified under 1000 concurrent users generating 480 req/s, zero failures across 121,000 requests.
